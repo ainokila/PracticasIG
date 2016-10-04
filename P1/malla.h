@@ -12,10 +12,11 @@ typedef struct{
 class Malla{
 
   public:
+    Malla();
     void dibujar();
 
   private:
-    
+
     unsigned long totalTriangulos;
     std::vector<Punto> triangulos;
 
