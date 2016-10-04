@@ -23,7 +23,7 @@ CC = g++
 
 # definicion de objetos
 #
-OBJECTS= practica1.o escena.o ejes.o malla.o
+OBJECTS= practica1.o escena.o ejes.o objeto.o
 # orden que sera ejecutada por defecto
 #
 default : $(TARGETS)
