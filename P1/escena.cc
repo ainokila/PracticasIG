@@ -17,7 +17,7 @@ Escena::Escena(){
     ejes.changeAxisSize(5000);
 
     //Se crea un cubo
-    cubo = new Cubo();
+    cubo = new Cubo(1,2,1);
 }
 
 void Escena::inicializar(int UI_window_width,int UI_window_height) {
