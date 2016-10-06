@@ -3,6 +3,8 @@
 
 #include "ejes.h"
 #include "cubo.h"
+#include "tetraedro.h"
+
 
 class Escena {
 private:
@@ -27,7 +29,7 @@ private:
 	void change_projection();
 	void change_observer();
 
-	Cubo *cubo ;
+	Objeto *objeto;
 
 
 public:

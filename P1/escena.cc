@@ -17,7 +17,8 @@ Escena::Escena(){
     ejes.changeAxisSize(5000);
 
     //Se crea un cubo
-    cubo = new Cubo();
+    //cubo = new Cubo();
+    objeto = new Tetraedro();
 }
 
 void Escena::inicializar(int UI_window_width,int UI_window_height) {
@@ -39,7 +40,8 @@ void Escena::inicializar(int UI_window_width,int UI_window_height) {
 //***************************************************************************
 void Escena::draw_objects() {
 
-  cubo->dibujar();
+  //cubo->dibujar();
+  objeto->dibujar();
 
 }
 
