@@ -20,8 +20,8 @@ class Objeto{
   protected:
 
     std::vector<float> triangulos;
-    int modoPintado = 0; //0 puntos 1 lineas 2 solido 3 ajedrez
-    GLenum mode = GL_TRIANGLES;
+    int modoPintado; //0 puntos 1 lineas 2 solido 3 ajedrez
+    GLenum mode;
 };
 
 #endif

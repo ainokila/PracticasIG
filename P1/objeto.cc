@@ -2,7 +2,8 @@
 #include<iostream>
 
 Objeto::Objeto(){
-
+  modoPintado = 0;
+  mode = GL_TRIANGLES;
 }
 void Objeto::dibujar(){
 

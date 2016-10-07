@@ -59,7 +59,7 @@ void Escena::dibujar() {
 
 int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
 
-    std::cout << "Tecla" << Tecla1<< std::endl;
+    std::cout << "Tecla " << Tecla1<< std::endl;
     //Aniadir cambios de escena ->
 	/*if (toupper(Tecla1)=='Q') return 1;
 	else return 0;*/
