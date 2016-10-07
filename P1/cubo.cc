@@ -19,9 +19,10 @@ Cubo::Cubo(float ladoX ,float ladoY ,float ladoZ){
 
   //Lateral Derecho
 
+  insertarVertice(ladoX*100.0f,ladoY*100.0f,ladoZ*-100.0f); //Minicambio
   insertarVertice(ladoX*100.0f,ladoY*0.0f,ladoZ*0.0f);
   insertarVertice(ladoX*100.0f,ladoY*0.0f,ladoZ*-100.0f);
-  insertarVertice(ladoX*100.0f,ladoY*100.0f,ladoZ*-100.0f);
+
 
   insertarVertice(ladoX*100.0f,ladoY*100.0f,ladoZ*-100.0f);
   insertarVertice(ladoX*100.0f,ladoY*100.0f,ladoZ*0.0f);
