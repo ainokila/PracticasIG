@@ -9,14 +9,30 @@ void Objeto::dibujar(){
   glEnableClientState(GL_VERTEX_ARRAY);
 
   glVertexPointer(3,GL_FLOAT,0,&triangulos[0]);
-  glDrawArrays( GL_TRIANGLES,0,triangulos.size()) ; //DUDA EN EL 3 O 0
+  glDrawArrays( mode,0,triangulos.size());
 
   glDisableClientState(GL_VERTEX_ARRAY);
 
 }
 
-void Objeto::cambiarDibujado(int nuevo){
+void Objeto::cambiarDibujado(int nuevo){ //0 puntos 1 lineas 2 solido 3 ajedrez
   modoPintado = nuevo;
+
+  switch (nuevo) {
+    case 0:
+      mode = GL_POINTS;
+      break;
+    case 1:
+      mode = GL_LINES;
+      break;
+    case 2:
+      mode = GL_TRIANGLES;
+    case 3:
+      mode = GL_TRIANGLES;
+      break;
+  }
+
+
 }
 
 

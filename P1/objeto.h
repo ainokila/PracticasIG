@@ -21,6 +21,7 @@ class Objeto{
 
     std::vector<float> triangulos;
     int modoPintado = 0; //0 puntos 1 lineas 2 solido 3 ajedrez
+    GLenum mode = GL_TRIANGLES;
 };
 
 #endif
