@@ -8,6 +8,7 @@ Objeto::Objeto(){
 void Objeto::dibujar(){
 
   glEnableClientState(GL_VERTEX_ARRAY);
+  glPointSize(4.0f);
 
   glVertexPointer(3,GL_FLOAT,0,&triangulos[0]);
   glDrawArrays( mode,0,triangulos.size());
@@ -24,7 +25,7 @@ void Objeto::cambiarDibujado(int nuevo){ //0 puntos 1 lineas 2 solido 3 ajedrez
       mode = GL_POINTS;
       break;
     case 1:
-      mode = GL_LINES;
+      mode = GL_LINE_STRIP;
       break;
     case 2:
       mode = GL_TRIANGLES;

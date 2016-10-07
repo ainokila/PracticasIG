@@ -60,9 +60,6 @@ void Escena::dibujar() {
 int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
 
     std::cout << "Tecla " << Tecla1<< std::endl;
-    //Aniadir cambios de escena ->
-	/*if (toupper(Tecla1)=='Q') return 1;
-	else return 0;*/
 
   switch (toupper(Tecla1)) {
     case 'Q':
@@ -78,16 +75,20 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
       break;
     case 'L':
       //Llamamos a modo lineas
-      objeto->cambiarDibujado(1);
+      if(objeto != NULL)
+        objeto->cambiarDibujado(1);
       break;
     case 'P':
-      objeto->cambiarDibujado(0);
+      if(objeto != NULL)
+        objeto->cambiarDibujado(0);
       break;
     case 'S':
-      objeto->cambiarDibujado(2);
+      if(objeto != NULL)
+        objeto->cambiarDibujado(2);
       break;
     case 'A':
-      objeto->cambiarDibujado(3);
+      if(objeto != NULL)
+        objeto->cambiarDibujado(3);
       break;
   }
 
