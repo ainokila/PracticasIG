@@ -11,7 +11,7 @@ Tetraedro::Tetraedro(float baseX,float alturaY,float baseZ){
   insertarVertice(43.0f,43.0f,-43.0f);//v3
 
 
-  insertarCara(0,1,2);
+  insertarCara(1,0,2);
   insertarCara(0,1,3);
   insertarCara(3,2,0);
   insertarCara(3,1,2);
