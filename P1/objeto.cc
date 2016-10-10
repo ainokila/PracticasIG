@@ -11,7 +11,8 @@ void Objeto::dibujar(){
   glPointSize(4.0f);
 
   glVertexPointer(3,GL_FLOAT,0,&triangulos[0]);
-  glDrawArrays( mode,0,triangulos.size());
+  //glDrawArrays( mode,0,triangulos.size());
+  glDrawElements(GL_TRIANGLES,caras.size(),GL_UNSIGNED_INT,&caras[0]);
 
   glDisableClientState(GL_VERTEX_ARRAY);
 
@@ -46,4 +47,10 @@ void Objeto::insertarVertice(float x,float y,float z){
   triangulos.push_back(x);
   triangulos.push_back(y);
   triangulos.push_back(z);
+}
+
+void Objeto::insertarCara(int v1, int v2, int v3){
+    caras.push_back(v1);
+    caras.push_back(v2);
+    caras.push_back(v3);
 }
