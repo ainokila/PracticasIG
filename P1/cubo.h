@@ -8,8 +8,8 @@
 class Cubo : public Objeto {
 
   public:
-    Cubo(float ladoX = 1,float ladoY = 1,float ladoZ =1 );
-    
+    Cubo(float ladoX = 50,float ladoY = 50,float ladoZ =50 );
+
 };
 
 
