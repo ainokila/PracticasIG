@@ -17,6 +17,11 @@ class Objeto{
     void insertarVertice(float x,float y,float z);
     void cambiarDibujado(int nuevo);
     void insertarCara(int v1, int v2, int v3);
+    inline void setTriangulos(std::vector<float> aux){triangulos = aux;};
+    inline void setCaras(std::vector<int> aux){caras = aux;};
+    void ampliar();
+    void reducir();
+
 
   protected:
 

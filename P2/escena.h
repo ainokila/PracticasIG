@@ -2,8 +2,9 @@
 #define _ESCENA_H
 
 #include "ejes.h"
-#include "cubo.h"
-#include "tetraedro.h"
+#include "objeto.h"
+#include "file_ply_stl.h"
+
 
 
 class Escena {
@@ -30,6 +31,7 @@ private:
 	void change_observer();
 
 	Objeto *objeto;
+	_file_ply *ply;
 
 
 public:
@@ -43,5 +45,6 @@ public:
 	// Interacci�n con la escena
 	int teclaPulsada(unsigned char Tecla1,int x,int y) ;
 	void teclaEspecial(int Tecla1,int x,int y);
+	void leerPly(char* ruta);
 };
 #endif

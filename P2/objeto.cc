@@ -11,9 +11,6 @@ void Objeto::dibujar(){
 
   glColor3f(0.35,0.33,0.15);
   glPointSize(4.0f);
-
-
-
   glEnableClientState(GL_VERTEX_ARRAY);
   glVertexPointer(3,GL_FLOAT,0,&triangulos[0]);
   glEnable(GL_CULL_FACE);
@@ -62,4 +59,17 @@ void Objeto::insertarCara(int v1, int v2, int v3){
     caras.push_back(v1);
     caras.push_back(v2);
     caras.push_back(v3);
+}
+
+void Objeto::ampliar(){
+  for(int i = 0 ; i < triangulos.size() ; i++){
+    triangulos[i]*=1.25;
+  }
+}
+
+void Objeto::reducir(){
+  for(int i = 0 ; i < triangulos.size() ; i++){
+    triangulos[i]/=1.25;
+  }
+
 }

@@ -8,7 +8,6 @@
 #include "escena.h"
 
 
-
 Escena::Escena(){
     Front_plane=50;
     Back_plane=2000;
@@ -19,7 +18,31 @@ Escena::Escena(){
     //Se crea un cubo
     //cubo = new Cubo();
     //objeto = new Tetraedro();
+
+    objeto = new Objeto();
+    std::string str = "/home/ainokila/Escritorio/PracticasIG/P2/beethoven.ply";
+    std::vector<char> cstr(str.c_str(), str.c_str() + str.size() + 1);
+    leerPly(&cstr[0]);
+
+
+
 }
+
+void Escena::leerPly(char* ruta){
+
+  if(objeto!= NULL){
+    ply = new _file_ply();
+    ply->open(ruta);
+    std::vector<float> vertices;
+    std::vector<int> caras;
+    ply->read(vertices,caras);
+
+    objeto->setTriangulos(vertices);
+    objeto->setCaras(caras);
+  }
+
+}
+
 
 void Escena::inicializar(int UI_window_width,int UI_window_height) {
 
@@ -65,14 +88,6 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
     case 'Q':
       return 1;
       break;
-    case 'T':
-      delete objeto;
-      objeto = new Tetraedro();
-      break;
-    case 'C':
-      delete objeto;
-      objeto = new Cubo();
-      break;
     case 'L':
       //Llamamos a modo lineas
       if(objeto != NULL)
@@ -86,9 +101,14 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
       if(objeto != NULL)
         objeto->cambiarDibujado(2);
       break;
-    case 'A':
+
+    case '+':
       if(objeto != NULL)
-        objeto->cambiarDibujado(3);
+        objeto->ampliar();
+      break;
+    case '-':
+      if(objeto != NULL)
+        objeto->reducir();
       break;
   }
 
