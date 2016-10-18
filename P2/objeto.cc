@@ -31,11 +31,8 @@ void Objeto::cambiarDibujado(int nuevo){ //0 puntos 1 lineas 2 solido 3 ajedrez
       break;
     default:
       modePolygon = GL_FILL;
-
       break;
   }
-
-
 }
 
 
@@ -67,3 +64,10 @@ void Objeto::reducir(){
   }
 
 }
+
+/*
+* Calcular Bounding Box
+*Despues 1 glTraslate(bx,by,bz)
+*Despues 2 glEscale(.....)
+*
+*/

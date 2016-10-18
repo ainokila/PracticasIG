@@ -20,7 +20,7 @@ Escena::Escena(){
     //objeto = new Tetraedro();
 
     objeto = new Objeto();
-    leerPly("/home/ainokila/Escritorio/PracticasIG/P2/beethoven.ply");
+    leerPly("/home/ainokila/Escritorio/modelos_ply/big_porsche.ply");
 
 
 
