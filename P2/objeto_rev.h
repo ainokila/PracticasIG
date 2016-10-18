@@ -10,7 +10,9 @@ public:
   ObjetoRevolucion(std::vector<float> puntos);
 
   ObjetoRevolucion(std::string file);
-
+private:
+  std::vector<float> puntosIniciales;
+  
 };
 
 

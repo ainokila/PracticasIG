@@ -3,8 +3,6 @@
 
 #include "ejes.h"
 #include "objeto.h"
-#include "file_ply_stl.h"
-
 
 
 class Escena {
@@ -44,6 +42,5 @@ public:
 	// Interacci�n con la escena
 	int teclaPulsada(unsigned char Tecla1,int x,int y) ;
 	void teclaEspecial(int Tecla1,int x,int y);
-	void leerPly(std::string str);
 };
 #endif

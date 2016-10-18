@@ -8,6 +8,7 @@
 #include "escena.h"
 
 
+
 Escena::Escena(){
     Front_plane=50;
     Back_plane=2000;
@@ -20,29 +21,11 @@ Escena::Escena(){
     //objeto = new Tetraedro();
 
     objeto = new Objeto();
-    leerPly("/home/ainokila/Escritorio/modelos_ply/big_porsche.ply");
+    objeto->leerPly("/home/ainokila/Escritorio/modelos_ply/big_porsche.ply");
 
 
 
 }
-
-void Escena::leerPly(std::string str){
-
-  if(objeto!= NULL){
-    _file_ply *ply;
-    ply = new _file_ply();
-    std::vector<char> cstr(str.c_str(), str.c_str() + str.size() + 1);
-    ply->open(&cstr[0]);
-    std::vector<float> vertices;
-    std::vector<int> caras;
-    ply->read(vertices,caras);
-
-    objeto->setTriangulos(vertices);
-    objeto->setCaras(caras);
-  }
-
-}
-
 
 void Escena::inicializar(int UI_window_width,int UI_window_height) {
 
