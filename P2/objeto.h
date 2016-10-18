@@ -28,7 +28,6 @@ class Objeto{
     std::vector<float> triangulos;
     std::vector<int> caras;
     int modoPintado; //0 puntos 1 lineas 2 solido 3 ajedrez
-    GLenum mode;
     GLenum modePolygon;
 };
 

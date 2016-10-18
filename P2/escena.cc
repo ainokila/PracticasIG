@@ -20,19 +20,19 @@ Escena::Escena(){
     //objeto = new Tetraedro();
 
     objeto = new Objeto();
-    std::string str = "/home/ainokila/Escritorio/PracticasIG/P2/beethoven.ply";
-    std::vector<char> cstr(str.c_str(), str.c_str() + str.size() + 1);
-    leerPly(&cstr[0]);
+    leerPly("/home/ainokila/Escritorio/PracticasIG/P2/beethoven.ply");
 
 
 
 }
 
-void Escena::leerPly(char* ruta){
+void Escena::leerPly(std::string str){
 
   if(objeto!= NULL){
+    _file_ply *ply;
     ply = new _file_ply();
-    ply->open(ruta);
+    std::vector<char> cstr(str.c_str(), str.c_str() + str.size() + 1);
+    ply->open(&cstr[0]);
     std::vector<float> vertices;
     std::vector<int> caras;
     ply->read(vertices,caras);

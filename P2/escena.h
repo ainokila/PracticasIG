@@ -31,7 +31,6 @@ private:
 	void change_observer();
 
 	Objeto *objeto;
-	_file_ply *ply;
 
 
 public:
@@ -45,6 +44,6 @@ public:
 	// Interacci�n con la escena
 	int teclaPulsada(unsigned char Tecla1,int x,int y) ;
 	void teclaEspecial(int Tecla1,int x,int y);
-	void leerPly(char* ruta);
+	void leerPly(std::string str);
 };
 #endif

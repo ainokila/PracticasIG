@@ -4,22 +4,19 @@
 Objeto::Objeto(){
 
   modoPintado = 2;
-  mode = GL_TRIANGLES;
   modePolygon = GL_FILL;
 }
 void Objeto::dibujar(){
 
   glColor3f(0.35,0.33,0.15);
-  glPointSize(4.0f);
-  glEnableClientState(GL_VERTEX_ARRAY);
-  glVertexPointer(3,GL_FLOAT,0,&triangulos[0]);
+  glPointSize(1.0f);
   glEnable(GL_CULL_FACE);
+
+  glEnableClientState(GL_VERTEX_ARRAY);
+  glVertexPointer(3,GL_FLOAT,0,&(triangulos[0]));
   glPolygonMode(GL_FRONT_AND_BACK,modePolygon);
-
-  glDrawElements(mode,caras.size(),GL_UNSIGNED_INT,&caras[0]);
+  glDrawElements(GL_TRIANGLES,caras.size(),GL_UNSIGNED_INT,&(caras[0]));
   glDisableClientState(GL_VERTEX_ARRAY);
-
-
 }
 
 void Objeto::cambiarDibujado(int nuevo){ //0 puntos 1 lineas 2 solido 3 ajedrez
@@ -27,15 +24,12 @@ void Objeto::cambiarDibujado(int nuevo){ //0 puntos 1 lineas 2 solido 3 ajedrez
 
   switch (nuevo) {
     case 0:
-      mode = GL_POINTS;
-      modePolygon = GL_FILL;
+      modePolygon = GL_POINT;
       break;
     case 1:
-      mode = GL_LINE_STRIP;
-      modePolygon = GL_LINES;
+      modePolygon = GL_LINE;
       break;
     default:
-      mode = GL_TRIANGLES;
       modePolygon = GL_FILL;
 
       break;
