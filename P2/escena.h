@@ -3,6 +3,7 @@
 
 #include "ejes.h"
 #include "objeto.h"
+#include "objeto_rev.h"
 
 
 class Escena {

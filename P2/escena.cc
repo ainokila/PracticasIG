@@ -20,8 +20,24 @@ Escena::Escena(){
     //cubo = new Cubo();
     //objeto = new Tetraedro();
 
-    objeto = new Objeto();
-    objeto->leerPly();
+    std::vector<float> aux;
+    aux.push_back(0.0f);
+    aux.push_back(1.0f);
+    aux.push_back(0.0f);
+
+    aux.push_back(1.0f);
+    aux.push_back(0.0f);
+    aux.push_back(0.0f);
+
+    aux.push_back(0.0f);
+    aux.push_back(-1.0f);
+    aux.push_back(0.0f);
+
+
+
+
+    objeto = new ObjetoRevolucion(aux,1);
+    //objeto->leerPly();
 }
 
 void Escena::inicializar(int UI_window_width,int UI_window_height) {

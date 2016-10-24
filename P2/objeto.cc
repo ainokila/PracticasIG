@@ -21,7 +21,8 @@ void Objeto::dibujar(){
   glPolygonMode(GL_FRONT_AND_BACK,modePolygon);
   glDrawElements(GL_TRIANGLES,caras.size(),GL_UNSIGNED_INT,&(caras[0]));
   glDisableClientState(GL_VERTEX_ARRAY);
-  bound.imprimeDatos();
+  //bound.imprimeDatos();
+  //std::cout << triangulos.size() << std::endl;
 
 }
 
