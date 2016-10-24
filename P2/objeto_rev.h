@@ -7,12 +7,13 @@
 class ObjetoRevolucion : public Objeto{
 
 public:
-  ObjetoRevolucion(std::vector<float> puntos);
+  ObjetoRevolucion(std::vector<float> puntos,float grados=30.0f);
+  ObjetoRevolucion(std::string file,float grados=30.0f);
+  void generarRevolucion(float grados);
 
-  ObjetoRevolucion(std::string file);
 private:
   std::vector<float> puntosIniciales;
-  
+
 };
 
 
