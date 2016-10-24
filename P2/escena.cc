@@ -21,10 +21,7 @@ Escena::Escena(){
     //objeto = new Tetraedro();
 
     objeto = new Objeto();
-    objeto->leerPly("/home/ainokila/Escritorio/modelos_ply/big_porsche.ply");
-
-
-
+    objeto->leerPly();
 }
 
 void Escena::inicializar(int UI_window_width,int UI_window_height) {

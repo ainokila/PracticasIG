@@ -75,18 +75,31 @@ void Objeto::reducir(){
 }
 //FIN ÑAPA
 
-void Objeto::leerPly(std::string str){
-  _file_ply *ply;
-  ply = new _file_ply();
-  std::vector<char> cstr(str.c_str(), str.c_str() + str.size() + 1);
-  ply->open(&cstr[0]);
-  std::vector<float> vertices;
-  std::vector<int> caras;
-  ply->read(vertices,caras);
+void Objeto::leerPly(){
+  std::string str;
+  std::cout << "Introduzca la direccion del PLY: " << std::endl;
+  cin >> str;
 
-  setTriangulos(vertices);
-  bound.calcularBoundingBox(vertices);
-  setCaras(caras);
+  if (FILE *file = fopen(str.c_str(), "r")) {
+      fclose(file);
+
+      _file_ply *ply;
+      ply = new _file_ply();
+      std::vector<char> cstr(str.c_str(), str.c_str() + str.size() + 1);
+      ply->open(&cstr[0]);
+      std::vector<float> vertices;
+      std::vector<int> caras;
+      ply->read(vertices,caras);
+
+      setTriangulos(vertices);
+      bound.calcularBoundingBox(vertices);
+      setCaras(caras);
+      
+  } else {
+      std::cerr << "Error , el archivo no existe" << std::endl;
+      leerPly();
+  }
+
 }
 
 

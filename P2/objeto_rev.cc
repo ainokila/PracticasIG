@@ -10,7 +10,7 @@ ObjetoRevolucion::ObjetoRevolucion(std::vector<float> puntos,float grados){
 }
 
 ObjetoRevolucion::ObjetoRevolucion(std::string file,float grados){
-  leerPly(file);
+  leerPly();
   generarRevolucion(grados);
 }
 
@@ -23,3 +23,4 @@ void ObjetoRevolucion::generarRevolucion(float grados){
     }
   }
 
+}

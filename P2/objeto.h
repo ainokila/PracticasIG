@@ -22,7 +22,9 @@ class Objeto{
     void insertarCara(int v1, int v2, int v3);
     inline void setTriangulos(std::vector<float> aux){triangulos = aux;};
     inline void setCaras(std::vector<int> aux){caras = aux;};
-    void leerPly(std::string str);
+    void leerPly();
+
+    
     void ampliar();
     void reducir();
 
