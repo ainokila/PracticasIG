@@ -27,6 +27,7 @@ void BoundingBox::nuevaZ(float z){
 }
 
 void BoundingBox::calcularBoundingBox(std::vector<float> v){
+  x_min=x_max=y_min=y_max=z_min=z_max=0.0f;
   for(int i = 0 ; i < v.size() ; i = i + 3){
     nuevaX(v[i]);
     nuevaY(v[i+1]);

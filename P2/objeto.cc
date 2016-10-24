@@ -1,6 +1,7 @@
 #include"objeto.h"
 #include<iostream>
 #include "file_ply_stl.h"
+#include <unistd.h>
 
 
 Objeto::Objeto(){
@@ -21,6 +22,7 @@ void Objeto::dibujar(){
   glDrawElements(GL_TRIANGLES,caras.size(),GL_UNSIGNED_INT,&(caras[0]));
   glDisableClientState(GL_VERTEX_ARRAY);
   bound.imprimeDatos();
+
 }
 
 void Objeto::cambiarDibujado(int nuevo){ //0 puntos 1 lineas 2 solido 3 ajedrez
@@ -74,14 +76,12 @@ void Objeto::reducir(){
   bound.calcularBoundingBox(triangulos);
 }
 //FIN ÑAPA
-
 void Objeto::leerPly(){
   std::string str;
   std::cout << "Introduzca la direccion del PLY: " << std::endl;
   cin >> str;
 
-  if (FILE *file = fopen(str.c_str(), "r")) {
-      fclose(file);
+  if (access( str.c_str(), F_OK ) != -1) {
 
       _file_ply *ply;
       ply = new _file_ply();
@@ -94,7 +94,7 @@ void Objeto::leerPly(){
       setTriangulos(vertices);
       bound.calcularBoundingBox(vertices);
       setCaras(caras);
-      
+
   } else {
       std::cerr << "Error , el archivo no existe" << std::endl;
       leerPly();

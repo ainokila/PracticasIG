@@ -24,7 +24,7 @@ class Objeto{
     inline void setCaras(std::vector<int> aux){caras = aux;};
     void leerPly();
 
-    
+
     void ampliar();
     void reducir();
 
