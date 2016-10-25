@@ -24,6 +24,8 @@ void Objeto::dibujar(){
   //bound.imprimeDatos();
   //std::cout << triangulos.size() << std::endl;
 
+  for(int i = 0 ; i < 10 ; i++)
+    std::cout << triangulos[i] << " ";
 }
 
 void Objeto::cambiarDibujado(int nuevo){ //0 puntos 1 lineas 2 solido 3 ajedrez

@@ -17,6 +17,7 @@ class Objeto{
     Objeto();
     void dibujar();
     int getNumTriangulos();
+    inline int getNumVertices(){return triangulos.size()/3;};
     void insertarVertice(float x,float y,float z);
     void cambiarDibujado(int nuevo);
     void insertarCara(int v1, int v2, int v3);

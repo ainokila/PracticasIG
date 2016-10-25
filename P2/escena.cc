@@ -26,7 +26,11 @@ Escena::Escena(){
     aux.push_back(0.0f);
 
     aux.push_back(1.0f);
+    aux.push_back(0.5f);
     aux.push_back(0.0f);
+
+    aux.push_back(1.0f);
+    aux.push_back(-0.5f);
     aux.push_back(0.0f);
 
     aux.push_back(0.0f);
@@ -36,7 +40,7 @@ Escena::Escena(){
 
 
 
-    objeto = new ObjetoRevolucion(aux,1);
+    objeto = new ObjetoRevolucion(aux,20);
     //objeto->leerPly();
 }
 
