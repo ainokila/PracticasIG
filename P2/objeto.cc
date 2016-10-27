@@ -13,7 +13,7 @@ Objeto::Objeto(){
 void Objeto::dibujar(){
 
   glTranslatef((bound.getMaxX()+bound.getMinX())/2.0f,(bound.getMaxY()+bound.getMinY())/2.0f,(bound.getMaxZ()+bound.getMinZ())/2.0f);
-  glScalef(bound.diffX()*1e+38,bound.diffY()*1e+38,bound.diffZ()*1e+38);
+  glScalef(bound.diffX()*10.4e+38,bound.diffY()*10.4e+38,bound.diffZ()*10.4e+38);
   //std::cout << bound.diffX()*1e+38 << " " << bound.diffY()*1e+38 << " " << bound.diffZ()*1e+38 << " " << std::endl ;
 
   glColor3f(0.35,0.33,0.15);
