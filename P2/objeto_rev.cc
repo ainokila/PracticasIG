@@ -4,7 +4,7 @@
 #include <math.h>
 #include <iostream>
 
-ObjetoRevolucion::ObjetoRevolucion(std::vector<Vertice> puntos,float grados){
+ObjetoRevolucion::ObjetoRevolucion(std::vector<float> puntos,float grados){
   puntosIniciales = puntos;
   generarRevolucion(grados);
 
@@ -18,32 +18,48 @@ ObjetoRevolucion::ObjetoRevolucion(std::string file,float grados){
 void ObjetoRevolucion::generarRevolucion(float grados){
 
   //puntos = puntosIniciales;
-  std::vector<Vertice>::iterator inicio = puntosIniciales.begin();
-  std::vector<Vertice>::iterator fin = puntosIniciales.end();
+  std::vector<float>::iterator inicio = puntosIniciales.begin();
+  std::vector<float>::iterator fin = puntosIniciales.end();
 
   int inicioPuntos = 0;
   int finPuntos = puntosIniciales.size();
+  int numVerticesInicio = puntosIniciales.size()/3;
+  bool tapaSuperiorBoundin = true;
+  bool tapaInferiorBoundin = true;
 
-  //Si estan en el eje los quitamos
-  if(puntosIniciales[0].x == 0.0f && puntosIniciales[0].z == 0.0f){
+  float tapaSuperior[3],tapaInferior[3];
+
+  //Si estan en el eje los quitamos si x==0 y z==0
+  if(puntosIniciales[0] == 0.0f && puntosIniciales[2] == 0.0f){
     for(int i = 0 ; i < 3; i++){
       inicio++;
     }
+    tapaSuperior[0] = tapaSuperior[2] = 0.0f;
+    tapaSuperior[1] = puntosIniciales[1];
     inicioPuntos = 3;
+    numVerticesInicio--;
+    //Hemos guardado el punto y decimos que no genere tapa mediante boundin
+    tapaSuperiorBoundin = false;
   }
 
-  //Si estan en el eje los quitamos
-  if(puntosIniciales[puntosIniciales.size()-1].x == 0.0f && puntosIniciales[puntosIniciales.size()-1].z == 0.0f){
+  //Si estan en el eje los quitamos si x==0 y z==0
+  if(puntosIniciales[puntosIniciales.size()-1] == 0.0f && puntosIniciales[puntosIniciales.size()-3] == 0.0f){
     for(int i = 0 ; i < 3; i++){
       fin--;
     }
+    tapaInferior[0] = tapaInferior[2] = 0.0f;
+    tapaInferior[1] = puntosIniciales[puntosIniciales.size()-2];
     finPuntos -= 3;
+    numVerticesInicio--;
+
+    //Hemos guardado el punto y decimos que no genere tapa mediante boundin
+    tapaInferiorBoundin = false;
   }
 
   //Aniado a triangulo los puntos iniciales excepto el primer y ultimo vertice
-  vertices.insert(vertices.begin(),inicio,fin);
+  puntos.insert(puntos.begin(),inicio,fin);
 
-  int numVerticesInicio = puntosIniciales.size()/3;
+
 
 
   //Insertamos los vertices creados por revolucion
@@ -52,22 +68,44 @@ void ObjetoRevolucion::generarRevolucion(float grados){
     float rad = i *( 3.14159265f/180.0f );
 
     //Genero los puntos del meridiano sin el vertice superior e inferior
-    for(int j = inicioPuntos ; j < finPuntos ; j++){
-      insertarVertice(puntosIniciales[j].x*cos(rad) + sin(rad)*puntosIniciales[j].z,puntosIniciales[j].y,-1*sin(rad)*puntosIniciales[j].x + puntosIniciales[j].z*cos(rad));
-      //insertarVertice(puntosIniciales[j]*cos(rad),puntosIniciales[j+1],puntosIniciales[j+2]*sin(rad));
+    for(int j = inicioPuntos ; j < finPuntos ; j = j+3){
+      insertarVertice(puntosIniciales[j]*cos(rad) + sin(rad)*puntosIniciales[j+2],puntosIniciales[j+1],-1*sin(rad)*puntosIniciales[j] + puntosIniciales[j+2]*cos(rad));
     }
 
 
-    int inicio = getNumVertices() - 2*(puntosIniciales.size())/3 ;
-    int fin = getNumVertices() - (puntosIniciales.size())/3 ;
+    int inicio = getNumVertices() - 2*(numVerticesInicio);
+    int fin = getNumVertices() - (numVerticesInicio) ;
 
-    for(int h = inicio  ; h < fin - 1 ; h++){
+    //Genera el cuerpo del objeto
+    for(int h = inicio  ; h < fin -1; h++){
         insertarCara(h,h+1,h+numVerticesInicio);
+        insertarCara(h+1,h+numVerticesInicio+1,h+numVerticesInicio);
     }
 
-    for(int h = (puntosIniciales.size())/3 ; h > fin +1 ; h--){
-        insertarCara(h,h-1,h-numVerticesInicio);
+    //Insertamos los vertices de la tapa situados en el eje de coordenadas de y
+    insertarVertice(tapaSuperior[0],tapaSuperior[1],tapaSuperior[2]);
+    insertarVertice(tapaInferior[0],tapaInferior[1],tapaInferior[2]);
+
+    //Generamos tapa superior
+
+    if(tapaSuperiorBoundin){
+      tapaSuperior[1] = bound.getMaxY();
     }
+
+    if(tapaInferiorBoundin){
+      tapaInferior[1] = bound.getMinY();
+    }
+
+    //ERROR!
+    //Tapa superior
+    for(int i=0;i<getNumVertices() - numVerticesInicio; i = i +numVerticesInicio ){
+      insertarCara(i,i+numVerticesInicio,(puntos.size()/3));
+    }
+    //Tapa inferior
+
+
+
+
 }
 
 

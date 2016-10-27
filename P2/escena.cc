@@ -19,7 +19,7 @@ Escena::Escena(){
     //Se crea un cubo
     //cubo = new Cubo();
     //objeto = new Tetraedro();
-    /*
+
     std::vector<float> aux;
     aux.push_back(0.0f);
     aux.push_back(1.0f);
@@ -27,6 +27,10 @@ Escena::Escena(){
 
     aux.push_back(1.0f);
     aux.push_back(0.5f);
+    aux.push_back(0.0f);
+
+    aux.push_back(1.5f);
+    aux.push_back(0.0f);
     aux.push_back(0.0f);
 
     aux.push_back(1.0f);
@@ -40,8 +44,7 @@ Escena::Escena(){
 
 
 
-    objeto = new ObjetoRevolucion(aux,20);*/
-    objeto->leerPly();
+    objeto = new ObjetoRevolucion(aux,20);
 }
 
 void Escena::inicializar(int UI_window_width,int UI_window_height) {
@@ -65,8 +68,8 @@ void Escena::draw_objects() {
 
   //cubo->dibujar();
 
-  /*if(objeto != NULL)
-    objeto->dibujar();*/
+  if(objeto != NULL)
+    objeto->dibujar();
 
 }
 
@@ -101,6 +104,11 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
       if(objeto != NULL)
         objeto->cambiarDibujado(2);
       break;
+
+    case 'C':
+    if(objeto != NULL)
+      objeto->leerPly();
+    break;
 
     case '+':
       if(objeto != NULL)
