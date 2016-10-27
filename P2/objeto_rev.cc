@@ -82,75 +82,37 @@ void ObjetoRevolucion::generarRevolucion(float grados){
         insertarCara(h+1,h+numVerticesInicio+1,h+numVerticesInicio);
     }
 
-    //Insertamos los vertices de la tapa situados en el eje de coordenadas de y
-    insertarVertice(tapaSuperior[0],tapaSuperior[1],tapaSuperior[2]);
-    insertarVertice(tapaInferior[0],tapaInferior[1],tapaInferior[2]);
 
-    //Generamos tapa superior
-
-    if(tapaSuperiorBoundin){
-      tapaSuperior[1] = bound.getMaxY();
-    }
-
-    if(tapaInferiorBoundin){
-      tapaInferior[1] = bound.getMinY();
-    }
-
-    //ERROR!
-    //Tapa superior
-    for(int i=0;i<getNumVertices() - numVerticesInicio; i = i +numVerticesInicio ){
-      insertarCara(i,i+numVerticesInicio,(puntos.size()/3));
-    }
-    //Tapa inferior
-
-
-
-
-}
-
-
-
-/* ******* PINTA MAAAL *******************
-std::vector<float>::iterator inicio = puntosIniciales.begin();
-std::vector<float>::iterator fin = puntosIniciales.end();
-
-for(int i = 0 ; i < 3; i++){
-  inicio++;
-  fin--;
-}
-
-//Aniado a triangulo los puntos iniciales excepto el primer y ultimo vertice
-puntos.insert(puntos.begin(),inicio,fin);
-
-//Le quitamos el primer y ultimo vertice de los puntos iniciales
-int numVerticesInicio = puntosIniciales.size()/3 - 2;
-
-
-//Insertamos los vertices creados por revolucion
-for(float i= grados; i < 360.0f ; i = i+grados){
-  float rad = i ;//*( 3.14159265/180.0 );
-
-  //Genero los puntos del meridiano sin el vertice superior e inferior
-  for(int j = 3 ; j < puntosIniciales.size()-3; j = j+3){
-    insertarVertice(puntosIniciales[j]*cos(rad) + sin(rad)*puntosIniciales[j+2],puntosIniciales[j+1],-1*sin(rad)*puntosIniciales[j] + puntosIniciales[j+2]*cos(rad));
   }
 
-  //Unir aqui con el perfil anterior
-
-  int inicio = getNumVertices() - 2 * numVerticesInicio;
-  int fin = getNumVertices()- numVerticesInicio-1;
-
-  for(int h = inicio  ; h < fin ; h++){
-      insertarCara(h,h+1,h+numVerticesInicio);
-  }
+      //Cerrar el bucle !
 
 
+      //Insertamos los vertices de la tapa situados en el eje de coordenadas de y
+      insertarVertice(tapaSuperior[0],tapaSuperior[1],tapaSuperior[2]);
+      insertarVertice(tapaInferior[0],tapaInferior[1],tapaInferior[2]);
 
-}*/
+      //Generamos tapa superior
 
+      if(tapaSuperiorBoundin){
+        tapaSuperior[1] = bound.getMaxY();
+      }
 
+      if(tapaInferiorBoundin){
+        tapaInferior[1] = bound.getMinY();
+      }
 
+      //ok!
+      for(int i=0;i<getNumVertices()-numVerticesInicio; i = i +numVerticesInicio ){
+      //Tapa superior
+        insertarCara(i,i+numVerticesInicio,(puntos.size()/3)-2);
+      }
 
+      //Error!
+      for(int i=numVerticesInicio;i<getNumVertices()-numVerticesInicio; i = i +numVerticesInicio ){
+        //Tapa inferior
+        insertarCara(i,i+numVerticesInicio,(puntos.size()/3));
+      }
 
 
 }
