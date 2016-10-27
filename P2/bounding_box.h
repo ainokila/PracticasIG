@@ -17,6 +17,9 @@ public:
   inline float getMaxY(){return y_max;};
   inline float getMinZ(){return z_min;};
   inline float getMaxZ(){return z_max;};
+  inline float diffX(){x_max-x_min;};
+  inline float diffY(){y_max-y_min;};
+  inline float diffZ(){z_max-z_min;};
 
 
 

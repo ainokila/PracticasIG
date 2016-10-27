@@ -21,7 +21,7 @@ Escena::Escena(){
     //objeto = new Tetraedro();
 
     std::vector<float> aux;
-    aux.push_back(0.0f);
+    aux.push_back(1.0f);
     aux.push_back(1.0f);
     aux.push_back(0.0f);
 
@@ -37,14 +37,14 @@ Escena::Escena(){
     aux.push_back(-0.5f);
     aux.push_back(0.0f);
 
-    aux.push_back(0.0f);
+    aux.push_back(1.0f);
     aux.push_back(-1.0f);
     aux.push_back(0.0f);
 
 
 
 
-    objeto = new ObjetoRevolucion(aux,20);
+    objeto = new ObjetoRevolucion(aux,15);
 }
 
 void Escena::inicializar(int UI_window_width,int UI_window_height) {
@@ -109,6 +109,11 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
     if(objeto != NULL)
       objeto->leerPly();
     break;
+
+    case 'R':
+      if(objeto != NULL){
+        cout << "aasad";
+      }
 
     case '+':
       if(objeto != NULL)
