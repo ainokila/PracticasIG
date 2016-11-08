@@ -1,4 +1,5 @@
 # PracticasIG
+
 Practica 1:
 Generacion de un cubo en modo puntos,lineas y solido mediante la lectura de teclado.
 
