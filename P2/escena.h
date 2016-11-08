@@ -30,6 +30,7 @@ private:
 	void change_observer();
 
 	Objeto *objeto;
+	ObjetoRevolucion *objetorev;
 
 
 public:

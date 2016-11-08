@@ -16,9 +16,13 @@ Escena::Escena(){
     Observer_angle_x = Observer_angle_y=0;
     ejes.changeAxisSize(5000);
 
+    objeto = NULL;
+    objetorev = NULL;
+
     //Se crea un cubo
     //cubo = new Cubo();
     //objeto = new Tetraedro();
+    /*
 
     std::vector<float> aux;
     aux.push_back(1.0f);
@@ -44,7 +48,7 @@ Escena::Escena(){
 
 
 
-    objeto = new ObjetoRevolucion(aux,15);
+    objeto = new ObjetoRevolucion(aux,15);*/
 }
 
 void Escena::inicializar(int UI_window_width,int UI_window_height) {
@@ -71,6 +75,9 @@ void Escena::draw_objects() {
   if(objeto != NULL)
     objeto->dibujar();
 
+  if(objetorev != NULL)
+    objetorev->dibujar();
+
 }
 
 
@@ -95,33 +102,98 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
       //Llamamos a modo lineas
       if(objeto != NULL)
         objeto->cambiarDibujado(1);
+
+      if(objetorev != NULL)
+        objetorev->cambiarDibujado(1);
       break;
     case 'P':
       if(objeto != NULL)
         objeto->cambiarDibujado(0);
+      if(objetorev != NULL)
+        objetorev->cambiarDibujado(0);
       break;
     case 'S':
       if(objeto != NULL)
         objeto->cambiarDibujado(2);
+
+      if(objetorev != NULL)
+        objetorev->cambiarDibujado(2);
       break;
 
     case 'C':
+    if(objetorev != NULL){
+      delete objetorev;
+      objetorev = NULL;
+    }
+    if(objeto == NULL)
+      objeto = new Objeto();
     if(objeto != NULL)
       objeto->leerPly();
     break;
 
+    case 'Z':
+    if(objeto!=NULL){
+      delete objeto;
+      objeto = NULL;
+    }
+    if(objetorev == NULL){
+      std::vector<float> aux;
+      aux.push_back(0.0f);  aux.push_back(0.1f);  aux.push_back(0.0f);
+      aux.push_back(0.7f);  aux.push_back(0.1f);  aux.push_back(0.0f);
+      aux.push_back(1.0f);  aux.push_back(0.0f);  aux.push_back(0.0f);
+      aux.push_back(1.1f);  aux.push_back(0.0f);  aux.push_back(0.0f);
+      aux.push_back(1.0f);  aux.push_back(0.5f);  aux.push_back(0.0f);
+      aux.push_back(0.5f);  aux.push_back(1.0f);  aux.push_back(0.0f);
+      aux.push_back(1.0f);  aux.push_back(2.0f);  aux.push_back(0.0f);
+      aux.push_back(1.5f);  aux.push_back(3.0f);  aux.push_back(0.0f);
+      aux.push_back(1.5f);  aux.push_back(4.0f);  aux.push_back(0.0f);
+      aux.push_back(1.5f);  aux.push_back(5.0f);  aux.push_back(0.0f);
+      aux.push_back(1.5f);  aux.push_back(6.0f);  aux.push_back(0.0f);
+      aux.push_back(1.25f);  aux.push_back(6.0f);  aux.push_back(0.0f);
+      aux.push_back(1.25f);  aux.push_back(5.0f);  aux.push_back(0.0f);
+      aux.push_back(1.0f);  aux.push_back(4.0f);  aux.push_back(0.0f);
+      aux.push_back(0.0f);  aux.push_back(3.0f);  aux.push_back(0.0f);
+
+      objetorev = new ObjetoRevolucion(aux,30.0f);
+    }
+    //if(objetorev != NULL){
+      //objetorev->leerPly();
+    //}
+
+    break;
+
     case 'R':
-      if(objeto != NULL){
-        cout << "aasad";
-      }
+    if(objeto!=NULL){
+      delete objeto;
+      objeto = NULL;
+    }
+    if(objetorev == NULL)
+      objetorev = new ObjetoRevolucion(30.0f);
+    if(objetorev != NULL)
+      objetorev->leerPly();
+    break;
+
+    case 'T':
+    if(objetorev != NULL)
+      objetorev->generaTapas();
+    break;
+
+    case 'E':
+    if(objetorev != NULL)
+      objetorev->quitaTapas();
+    break;
 
     case '+':
       if(objeto != NULL)
         objeto->ampliar();
+      if(objetorev != NULL)
+        objetorev->ampliar();
       break;
     case '-':
       if(objeto != NULL)
         objeto->reducir();
+      if(objetorev != NULL)
+        objetorev->reducir();
       break;
   }
 

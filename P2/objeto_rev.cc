@@ -3,19 +3,30 @@
 #include <vector>
 #include <math.h>
 #include <iostream>
+#include <unistd.h>
 
-ObjetoRevolucion::ObjetoRevolucion(std::vector<float> puntos,float grados){
+
+ObjetoRevolucion::ObjetoRevolucion(float gr){
+  grados = gr;
+  carasTapas=0;
+
+}
+ObjetoRevolucion::ObjetoRevolucion(std::vector<float> puntos,float gr){
   puntosIniciales = puntos;
-  generarRevolucion(grados);
+  grados = gr;
+  generarRevolucion();
+  carasTapas=0;
 
 }
 
-ObjetoRevolucion::ObjetoRevolucion(std::string file,float grados){
+ObjetoRevolucion::ObjetoRevolucion(std::string file,float gr){
+  grados = gr;
   leerPly();
-  generarRevolucion(grados);
+  generarRevolucion();
+  carasTapas=0;
 }
 
-void ObjetoRevolucion::generarRevolucion(float grados){
+void ObjetoRevolucion::generarRevolucion(){
 
   //puntos = puntosIniciales;
   std::vector<float>::iterator inicio = puntosIniciales.begin();
@@ -23,7 +34,7 @@ void ObjetoRevolucion::generarRevolucion(float grados){
 
   int inicioPuntos = 0;
   int finPuntos = puntosIniciales.size();
-  int numVerticesInicio = puntosIniciales.size()/3;
+  numVerticesInicio = puntosIniciales.size()/3;
   bool tapaSuperiorBoundin = true;
   bool tapaInferiorBoundin = true;
 
@@ -75,12 +86,21 @@ void ObjetoRevolucion::generarRevolucion(float grados){
 
     //Genera el cuerpo del objeto
     for(int h = inicio  ; h < fin -1; h++){
-        insertarCara(h,h+1,h+numVerticesInicio);
-        insertarCara(h+1,h+numVerticesInicio+1,h+numVerticesInicio);
+        insertarCara(h,h+numVerticesInicio,h+1);
+        insertarCara(h+1,h+numVerticesInicio,h+numVerticesInicio+1);
     }
 
 
   }
+
+   //UNO EL PRINCIPIO CON EL FINAL
+   for(int h = getNumVertices() - numVerticesInicio   ; h < getNumVertices()-1; h++){
+        insertarCara((h)%getNumVertices(),(h+numVerticesInicio)%getNumVertices(),(h+1)%getNumVertices());
+        insertarCara((h+1)%getNumVertices(),(h+numVerticesInicio)%getNumVertices(),(h+numVerticesInicio+1)%getNumVertices());
+    }
+
+  //UNIR AQUI EL INICIO CON EL FINAL
+
 
   bound.calcularBoundingBox(puntos);
 
@@ -95,28 +115,89 @@ void ObjetoRevolucion::generarRevolucion(float grados){
 
   if(tapaInferiorBoundin){
       tapaInferior[1] = bound.getMinY();
-      std::cout << "Eje inferior " << tapaInferior[1] << std::endl;
+      std::cout << "Eje inferior " << tapaInferior[0] << " " << tapaInferior[1] << " " << tapaInferior[2] << std::endl;
   }
 
       //Insertamos los vertices de la tapa situados en el eje de coordenadas de y
   insertarVertice(tapaSuperior[0],tapaSuperior[1],tapaSuperior[2]);
   insertarVertice(tapaInferior[0],tapaInferior[1],tapaInferior[2]);
 
-  for(int i= 0 ; i < puntos.size();i++){
-      std::cout << puntos[i] << " " ;
-  }
+  //for(int i= 0 ; i < puntos.size();i++){
+      //std::cout << puntos[i] << " " ;
+  //}
+  //generaTapas();
 
-  //ok!
-  for(int i=0;i<getNumVertices()-numVerticesInicio-2; i = i + numVerticesInicio ){
-      //Tapa superior
-      insertarCara(i,i+numVerticesInicio,(puntos.size()/3)-2);
-  }
+}
 
-      //Error!
-  for(int i=numVerticesInicio-1;i<getNumVertices()-numVerticesInicio -2; i = i +numVerticesInicio ){
-      //Tapa inferior
-     insertarCara((puntos.size()/3)-1,i+numVerticesInicio,i);
-  }
+void ObjetoRevolucion::generaTapas(){
 
+
+	if(carasTapas == 0){
+
+		int tapaSuperior = getNumVertices()-2;
+    int tapaInferior = getNumVertices()-1;
+
+    //GENERA BASE
+    cout << caras.size()/3 << " " << puntos.size()/3 << endl;
+
+    for(int i=0;i<getNumVertices()-2-numVerticesInicio; i = i + numVerticesInicio ){
+        //Si no va cambiar 2 por el 1
+        cout <<"Creando cara : "<< i << " " << tapaInferior << " " << i+numVerticesInicio <<  endl;
+        insertarCara(i,tapaInferior,i+numVerticesInicio);
+        carasTapas++;
+    }
+
+    //GENERA TAPA -numVerticesInicio-2;
+    for(int i=numVerticesInicio-1;i<getNumVertices()-numVerticesInicio-2; i = i +numVerticesInicio ){
+        //Si no va cambiar 1 por el 2
+        cout <<"Creando cara : "<< tapaSuperior << " " << i << " " << i+numVerticesInicio <<  endl;
+       insertarCara(tapaSuperior,i,i+numVerticesInicio);
+       carasTapas++;
+    }
+
+    insertarCara(0,getNumVertices()-numVerticesInicio-2,tapaInferior);
+    carasTapas++;
+    //Arreglar
+    insertarCara(numVerticesInicio-1,getNumVertices()-2,getNumVertices()-3);
+    carasTapas++;
+
+	}
+
+}
+
+void ObjetoRevolucion::quitaTapas(){
+
+  for(int i = 0 ; i < carasTapas*3 ; i++)
+    caras.pop_back();
+
+  carasTapas = 0;
+}
+
+void ObjetoRevolucion::leerPly(){
+  std::string str;
+  std::cout << "Introduzca la direccion del PLY de Revolucion: " << std::endl;
+  cin >> str;
+
+  if (access( str.c_str(), F_OK ) != -1) {
+      puntos.clear();
+      caras.clear();
+      _file_ply *ply;
+      ply = new _file_ply();
+      std::vector<char> cstr(str.c_str(), str.c_str() + str.size() + 1);
+      ply->open(&cstr[0]);
+      std::vector<float> vertices;
+      std::vector<int> caras;
+      ply->read(vertices,caras);
+
+      //setPuntos(vertices);
+      bound.calcularBoundingBox(vertices);
+      //setCaras(caras);
+      puntosIniciales = vertices;
+      generarRevolucion();
+
+  } else {
+      std::cerr << "Error , el archivo no existe" << std::endl;
+      leerPly();
+  }
 
 }
