@@ -36,8 +36,8 @@ void BoundingBox::calcularBoundingBox(std::vector<float> v){
 }
 
 void BoundingBox::imprimeDatos(){
-  std::cout << x_min << "-" << x_max << std::endl;
-  std::cout << y_min << "-" << y_max << std::endl;
-  std::cout << z_min << "-" << z_max << std::endl;
+  std::cout << x_min << " - " << x_max << std::endl;
+  std::cout << y_min << " - " << y_max << std::endl;
+  std::cout << z_min << " - " << z_max << std::endl;
 
 }

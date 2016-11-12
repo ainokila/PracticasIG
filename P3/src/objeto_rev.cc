@@ -126,8 +126,10 @@ void ObjetoRevolucion::generarRevolucion(){
   }
 
       //Insertamos los vertices de la tapa situados en el eje de coordenadas de y
-  insertarVertice(tapaSuperior[0],tapaSuperior[1],tapaSuperior[2]);
+      
+  //Si no funciona cambiar el orden
   insertarVertice(tapaInferior[0],tapaInferior[1],tapaInferior[2]);
+  insertarVertice(tapaSuperior[0],tapaSuperior[1],tapaSuperior[2]);
 
   //for(int i= 0 ; i < puntos.size();i++){
       //std::cout << puntos[i] << " " ;

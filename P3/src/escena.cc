@@ -99,6 +99,9 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
     case 'Q':
       return 1;
       break;
+
+    //MODO DE DIBUJADO ->>
+
     case 'L':
       //Llamamos a modo lineas
       if(objeto != NULL)
@@ -107,12 +110,14 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
       if(objetorev != NULL)
         objetorev->cambiarDibujado(1);
       break;
+
     case 'P':
       if(objeto != NULL)
         objeto->cambiarDibujado(0);
       if(objetorev != NULL)
         objetorev->cambiarDibujado(0);
       break;
+
     case 'S':
       if(objeto != NULL)
         objeto->cambiarDibujado(2);
@@ -121,7 +126,17 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
         objetorev->cambiarDibujado(2);
       break;
 
-    case 'C':
+    case 'A':
+      if(objeto != NULL)
+        objeto->cambiarDibujado(3);
+
+      if(objetorev != NULL)
+        objetorev->cambiarDibujado(3);
+      break;
+
+    //Tipo de Objeto ->
+
+    case '1':
     if(objetorev != NULL){
       delete objetorev;
       objetorev = NULL;
@@ -132,55 +147,25 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
       objeto->leerPly();
     break;
 
-    case 'Z':
-    if(objeto!=NULL){
-      delete objeto;
-      objeto = NULL;
-    }
-    if(objetorev == NULL){
-      std::vector<float> aux;
-      aux.push_back(0.0f);  aux.push_back(0.1f);  aux.push_back(0.0f);
-      aux.push_back(0.7f);  aux.push_back(0.1f);  aux.push_back(0.0f);
-      aux.push_back(1.0f);  aux.push_back(0.0f);  aux.push_back(0.0f);
-      aux.push_back(1.1f);  aux.push_back(0.0f);  aux.push_back(0.0f);
-      aux.push_back(1.0f);  aux.push_back(0.5f);  aux.push_back(0.0f);
-      aux.push_back(0.5f);  aux.push_back(1.0f);  aux.push_back(0.0f);
-      aux.push_back(1.0f);  aux.push_back(2.0f);  aux.push_back(0.0f);
-      aux.push_back(1.5f);  aux.push_back(3.0f);  aux.push_back(0.0f);
-      aux.push_back(1.5f);  aux.push_back(4.0f);  aux.push_back(0.0f);
-      aux.push_back(1.5f);  aux.push_back(5.0f);  aux.push_back(0.0f);
-      aux.push_back(1.5f);  aux.push_back(6.0f);  aux.push_back(0.0f);
-      aux.push_back(1.25f);  aux.push_back(6.0f);  aux.push_back(0.0f);
-      aux.push_back(1.25f);  aux.push_back(5.0f);  aux.push_back(0.0f);
-      aux.push_back(1.0f);  aux.push_back(4.0f);  aux.push_back(0.0f);
-      aux.push_back(0.0f);  aux.push_back(3.0f);  aux.push_back(0.0f);
-
-      objetorev = new ObjetoRevolucion(aux,30.0f);
-    }
-    //if(objetorev != NULL){
-      //objetorev->leerPly();
-    //}
-
-    break;
-
-    case 'R':
+    case '2':
     if(objeto!=NULL){
       delete objeto;
       objeto = NULL;
     }
     if(objetorev == NULL)
-      objetorev = new ObjetoRevolucion(30.0f);
+      objetorev = new ObjetoRevolucion(15.0f);
     if(objetorev != NULL)
       objetorev->leerPly();
     break;
 
-    case 'B':
+    //Modelo Jerarquico
+    case '3':
     if(objeto!=NULL){
       delete objeto;
       objeto = NULL;
     }
     if(objetorev == NULL)
-      objetorev = new Foco();
+      objetorev = new Base();
     break;
 
     case 'T':
@@ -193,11 +178,6 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
       objetorev->quitaTapas();
     break;
 
-    case 'M':
-    if(objeto == NULL)
-      objeto = new Amplificador();
-
-    break;
 
     case '+':
       if(objeto != NULL)
