@@ -28,7 +28,7 @@ void Objeto::dibujar(){
       cara2.push_back(0.5f);
     }
 
-    glScalef(80,80,80);
+    //glScalef(80,80,80);
 
     glEnable(GL_CULL_FACE);
     glEnableClientState(GL_VERTEX_ARRAY);
@@ -64,7 +64,7 @@ void Objeto::dibujar(){
     //glScalef(10.0f*bound.ladoX(),10.0f*bound.ladoY(),10.0f*bound.ladoZ());
     //std::cout << bound.ladoX() << " " << bound.ladoY() << " " << bound.ladoZ() << std::endl;
     //bound.imprimeDatos();
-    glScalef(80,80,80);
+    //glScalef(12,12,12);
     //std::cout << bound.diffX()*1e+38 << " " << bound.diffY()*1e+38 << " " << bound.diffZ()*1e+38 << " " << std::endl ;
 
     glPointSize(1.0f);
@@ -127,18 +127,21 @@ void Objeto::insertarCara(int v1, int v2, int v3){
 void Objeto::ampliar(){
   //glTranslatef((bound.getMaxX()+bound.getMinX())/2.0f,(bound.getMaxY()+bound.getMinY())/2.0f,(bound.getMaxZ()+bound.getMinZ())/2.0f);
   //glScalef((bound.getMaxX()+bound.getMinX())*1e+38,(bound.getMaxY()+bound.getMinY())*1e+38,(bound.getMaxZ()+bound.getMinZ())*1e+38);
-/*
-  for(int i = 0 ; i < puntos.size() ; i++){
+
+  /*for(int i = 0 ; i < puntos.size() ; i++){
     puntos[i]*=1.25f;
   }
   bound.calcularBoundingBox(puntos);*/
+  glScalef(2.0f,2.0f,2.0f);
 }
 
-void Objeto::reducir(){/*
-  for(int i = 0 ; i < puntos.size() ; i++){
+void Objeto::reducir(){
+  /*for(int i = 0 ; i < puntos.size() ; i++){
     puntos[i]/=1.25f;
   }
   bound.calcularBoundingBox(puntos);*/
+  glScalef(0.5f,0.5f,0.5f);
+
 }
 //FIN ÑAPA
 void Objeto::leerPly(){

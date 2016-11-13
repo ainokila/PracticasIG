@@ -4,10 +4,7 @@
 #include "ejes.h"
 #include "objeto.h"
 #include "objeto_rev.h"
-#include "cubo.h"
-#include "foco.h"
-#include "base.h"
-#include "amplificador.h"
+#include "lampara.h"
 
 
 
@@ -36,6 +33,7 @@ private:
 
 	Objeto *objeto;
 	ObjetoRevolucion *objetorev;
+	Lampara *lampara;
 
 
 public:

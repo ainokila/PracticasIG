@@ -117,16 +117,16 @@ void ObjetoRevolucion::generarRevolucion(){
 
   if(tapaSuperiorBoundin){
       tapaSuperior[1] = bound.getMaxY();
-      std::cout << "Eje superior " << tapaSuperior[0] << " " << tapaSuperior[1] << " " << tapaSuperior[2] << std::endl;
+      //std::cout << "Eje superior " << tapaSuperior[0] << " " << tapaSuperior[1] << " " << tapaSuperior[2] << std::endl;
   }
 
   if(tapaInferiorBoundin){
       tapaInferior[1] = bound.getMinY();
-      std::cout << "Eje inferior " << tapaInferior[0] << " " << tapaInferior[1] << " " << tapaInferior[2] << std::endl;
+      //std::cout << "Eje inferior " << tapaInferior[0] << " " << tapaInferior[1] << " " << tapaInferior[2] << std::endl;
   }
 
       //Insertamos los vertices de la tapa situados en el eje de coordenadas de y
-      
+
   //Si no funciona cambiar el orden
   insertarVertice(tapaInferior[0],tapaInferior[1],tapaInferior[2]);
   insertarVertice(tapaSuperior[0],tapaSuperior[1],tapaSuperior[2]);
@@ -151,7 +151,7 @@ void ObjetoRevolucion::generaTapas(){
 
     for(int i=0;i<getNumVertices()-2-numVerticesInicio; i = i + numVerticesInicio ){
         //Si no va cambiar 2 por el 1
-        cout <<"Creando cara : "<< i << " " << tapaInferior << " " << i+numVerticesInicio <<  endl;
+        //cout <<"Creando cara : "<< i << " " << tapaInferior << " " << i+numVerticesInicio <<  endl;
         insertarCara(i,tapaInferior,i+numVerticesInicio);
         carasTapas++;
     }
@@ -159,7 +159,7 @@ void ObjetoRevolucion::generaTapas(){
     //GENERA TAPA -numVerticesInicio-2;
     for(int i=numVerticesInicio-1;i<getNumVertices()-numVerticesInicio-2; i = i +numVerticesInicio ){
         //Si no va cambiar 1 por el 2
-        cout <<"Creando cara : "<< tapaSuperior << " " << i << " " << i+numVerticesInicio <<  endl;
+        //cout <<"Creando cara : "<< tapaSuperior << " " << i << " " << i+numVerticesInicio <<  endl;
        insertarCara(tapaSuperior,i,i+numVerticesInicio);
        carasTapas++;
     }

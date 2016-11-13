@@ -6,6 +6,7 @@
 #include <GL/gl.h>
 #include <GL/glut.h>
 #include "escena.h"
+#include "lampara.h"
 
 
 
@@ -19,6 +20,7 @@ Escena::Escena(){
 
     objeto = NULL;
     objetorev = NULL;
+    lampara = NULL;
 
     //Se crea un cubo
     //cubo = new Cubo();
@@ -79,6 +81,8 @@ void Escena::draw_objects() {
   if(objetorev != NULL)
     objetorev->dibujar();
 
+  if(lampara != NULL)
+    lampara->dibujar();
 }
 
 
@@ -104,6 +108,9 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
 
     case 'L':
       //Llamamos a modo lineas
+      if(lampara != NULL)
+        lampara->cambiarDibujado(1);
+
       if(objeto != NULL)
         objeto->cambiarDibujado(1);
 
@@ -112,6 +119,9 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
       break;
 
     case 'P':
+      if(lampara != NULL)
+        lampara->cambiarDibujado(0);
+
       if(objeto != NULL)
         objeto->cambiarDibujado(0);
       if(objetorev != NULL)
@@ -119,6 +129,9 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
       break;
 
     case 'S':
+      if(lampara != NULL)
+        lampara->cambiarDibujado(2);
+
       if(objeto != NULL)
         objeto->cambiarDibujado(2);
 
@@ -127,6 +140,8 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
       break;
 
     case 'A':
+      if(lampara != NULL)
+        lampara->cambiarDibujado(3);
       if(objeto != NULL)
         objeto->cambiarDibujado(3);
 
@@ -141,6 +156,10 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
       delete objetorev;
       objetorev = NULL;
     }
+    if(lampara != NULL){
+      delete lampara;
+      lampara = NULL;
+    }
     if(objeto == NULL)
       objeto = new Objeto();
     if(objeto != NULL)
@@ -152,6 +171,11 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
       delete objeto;
       objeto = NULL;
     }
+    if(lampara != NULL){
+      delete lampara;
+      lampara = NULL;
+    }
+
     if(objetorev == NULL)
       objetorev = new ObjetoRevolucion(15.0f);
     if(objetorev != NULL)
@@ -160,12 +184,16 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
 
     //Modelo Jerarquico
     case '3':
+    if(objetorev!=NULL){
+      delete objetorev;
+      objetorev = NULL;
+    }
     if(objeto!=NULL){
       delete objeto;
       objeto = NULL;
     }
-    if(objetorev == NULL)
-      objetorev = new Base();
+    if(lampara == NULL)
+      lampara = new Lampara();
     break;
 
     case 'T':
@@ -184,12 +212,17 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
         objeto->ampliar();
       if(objetorev != NULL)
         objetorev->ampliar();
+      if(lampara != NULL)
+          lampara->ampliar();
+
       break;
     case '-':
       if(objeto != NULL)
         objeto->reducir();
       if(objetorev != NULL)
         objetorev->reducir();
+      if(lampara != NULL)
+          lampara->reducir();
       break;
   }
 
