@@ -224,6 +224,42 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
       if(lampara != NULL)
           lampara->reducir();
       break;
+
+    case 'Z':
+      if(lampara != NULL){
+        lampara->incrementarFoco();
+      }
+      break;
+
+    case 'X':
+      if(lampara != NULL){
+        lampara->decrementarFoco();
+      }
+      break;
+
+    case 'C':
+      if(lampara != NULL){
+        lampara->incrementarUnion();
+      }
+      break;
+
+    case 'V':
+      if(lampara != NULL){
+        lampara->decrementarUnion();
+      }
+      break;
+
+    case 'B':
+      if(lampara != NULL){
+        lampara->incrementarBase();
+      }
+      break;
+
+    case 'N':
+      if(lampara != NULL){
+        lampara->decrementarBase();
+      }
+      break;
   }
 
   return 0;
