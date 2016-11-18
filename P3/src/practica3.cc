@@ -23,6 +23,13 @@ void draw_scene(void)  {
 	glutSwapBuffers();
 }
 
+void anim(void){
+	if (escena!=NULL){
+		escena->animacion();
+		glutPostRedisplay();
+	}
+}
+
 
 //***************************************************************************
 // Funcion llamada cuando se produce un cambio en el tamaño de la ventana
@@ -112,6 +119,9 @@ glutReshapeFunc(change_window_size);
 glutKeyboardFunc(normal_keys);
 // asignación de la funcion llamada "tecla_Especial" al evento correspondiente
 glutSpecialFunc(special_keys);
+
+//Funcion de animacion
+glutIdleFunc(anim);
 
 // funcion de inicialización
 escena->inicializar(UI_window_width,UI_window_height);

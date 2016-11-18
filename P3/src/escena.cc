@@ -260,9 +260,34 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
         lampara->decrementarBase();
       }
       break;
+
+    case '9':
+      if(lampara != NULL){
+        lampara->disminuirVelocidad();
+      }
+      break;
+
+    case '8':
+      if(lampara != NULL){
+        lampara->aumentarVelocidad();
+      }
+      break;
+
+    case ',':
+      if(lampara != NULL){
+        lampara->interruptor();
+      }
+      break;
   }
 
   return 0;
+}
+
+void Escena::animacion(){
+  if(lampara != NULL){
+    lampara->animacion();
+    //lampara->dibujar();
+  }
 }
 
 void Escena::teclaEspecial(int Tecla1,int x,int y) {

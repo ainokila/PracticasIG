@@ -13,19 +13,19 @@ Objeto::Objeto(){
 void Objeto::dibujar(){
 
   if(modoPintado==3){
-    std::vector<float> cara1;
+    std::vector<float> color1;
     for(int i = 0; i<puntos.size();i = i + 3){
-      cara1.push_back(0.35f);
-      cara1.push_back(0.33f);
-      cara1.push_back(0.15f);
+      color1.push_back(0.35f);
+      color1.push_back(0.33f);
+      color1.push_back(0.15f);
 
     }
 
-    std::vector<float> cara2;
+    std::vector<float> color2;
     for(int i = 0; i<puntos.size();i = i + 3){
-      cara2.push_back(0.6f);
-      cara2.push_back(0.5f);
-      cara2.push_back(0.5f);
+      color2.push_back(0.6f);
+      color2.push_back(0.5f);
+      color2.push_back(0.5f);
     }
 
     //glScalef(80,80,80);
@@ -36,12 +36,12 @@ void Objeto::dibujar(){
     glPolygonMode(GL_FRONT_AND_BACK,modePolygon);
 
     glEnableClientState(GL_COLOR_ARRAY);
-    glColorPointer(3,GL_FLOAT,0,&cara1[0]);
+    glColorPointer(3,GL_FLOAT,0,&color1[0]);
     glDrawElements(GL_TRIANGLES,caras.size()/2,GL_UNSIGNED_INT,&(caras[0]));
     glDisableClientState(GL_COLOR_ARRAY);
 
     glEnableClientState(GL_COLOR_ARRAY);
-    glColorPointer(3,GL_FLOAT,0,&cara2[0]);
+    glColorPointer(3,GL_FLOAT,0,&color2[0]);
     glDrawElements(GL_TRIANGLES,caras.size()/2,GL_UNSIGNED_INT,&(caras[caras.size()/2]));
     glDisableClientState(GL_COLOR_ARRAY);
 
@@ -52,11 +52,11 @@ void Objeto::dibujar(){
 
   }else{
 
-    std::vector<float> cara1;
+    std::vector<float> color1;
     for(int i = 0; i<puntos.size();i = i + 3){
-      cara1.push_back(0.35f);
-      cara1.push_back(0.33f);
-      cara1.push_back(0.15f);
+      color1.push_back(0.35f);
+      color1.push_back(0.33f);
+      color1.push_back(0.15f);
     }
 
     //glTranslatef(-bound.centroX(),-bound.centroY(),-bound.centroZ());
@@ -72,7 +72,7 @@ void Objeto::dibujar(){
     glEnableClientState(GL_VERTEX_ARRAY);
     glVertexPointer(3,GL_FLOAT,0,&(puntos[0]));
     glPolygonMode(GL_FRONT_AND_BACK,modePolygon);
-    glColorPointer(3,GL_FLOAT,0,&cara1[0]);
+    glColorPointer(3,GL_FLOAT,0,&color1[0]);
     glDrawElements(GL_TRIANGLES,caras.size(),GL_UNSIGNED_INT,&(caras[0]));
     glDisableClientState(GL_VERTEX_ARRAY);
 
