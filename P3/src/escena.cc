@@ -261,6 +261,12 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
       }
       break;
 
+    /*case '0':
+      if(lampara != NULL){
+        lampara->paraAnimacion();
+      }
+      break;*/
+
     case '9':
       if(lampara != NULL){
         lampara->disminuirVelocidad();
