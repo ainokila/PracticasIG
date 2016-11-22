@@ -22,36 +22,6 @@ Escena::Escena(){
     objetorev = NULL;
     lampara = NULL;
 
-    //Se crea un cubo
-    //cubo = new Cubo();
-    //objeto = new Tetraedro();
-    /*
-
-    std::vector<float> aux;
-    aux.push_back(1.0f);
-    aux.push_back(1.0f);
-    aux.push_back(0.0f);
-
-    aux.push_back(1.0f);
-    aux.push_back(0.5f);
-    aux.push_back(0.0f);
-
-    aux.push_back(1.5f);
-    aux.push_back(0.0f);
-    aux.push_back(0.0f);
-
-    aux.push_back(1.0f);
-    aux.push_back(-0.5f);
-    aux.push_back(0.0f);
-
-    aux.push_back(1.0f);
-    aux.push_back(-1.0f);
-    aux.push_back(0.0f);
-
-
-
-
-    objeto = new ObjetoRevolucion(aux,15);*/
 }
 
 void Escena::inicializar(int UI_window_width,int UI_window_height) {

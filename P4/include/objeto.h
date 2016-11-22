@@ -32,11 +32,16 @@ class Objeto{
     void ampliar();
     void reducir();
 
+    void calcularNormalesPuntos();
+
 
   protected:
 
     std::vector<float> puntos;
+    std::vector<float> normalesPuntos;
+    std::vector<float> auxiliarNormal;
     std::vector<int> caras;
+    std::vector<float> normalesCaras;
     int modoPintado; //0 puntos 1 lineas 2 solido 3 ajedrez
     GLenum modePolygon;
     BoundingBox bound;
