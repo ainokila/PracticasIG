@@ -71,24 +71,24 @@ void Objeto::dibujar(){
     glEnable(GL_CULL_FACE);
     glEnableClientState(GL_VERTEX_ARRAY);
     glVertexPointer(3,GL_FLOAT,0,&(puntos[0]));
-    glPolygonMode(GL_FRONT_AND_BACK,modePolygon);
+
     glColorPointer(3,GL_FLOAT,0,&color1[0]);
     glDrawElements(GL_TRIANGLES,caras.size(),GL_UNSIGNED_INT,&(caras[0]));
     glDisableClientState(GL_VERTEX_ARRAY);
     */
-    if(modePolygon == GL_FILL){
+    if(modePolygon == GL_FILL || modePolygon == GL_POINT || modePolygon == GL_LINE){
       std::vector<float> color2;
       for(int i = 0; i<puntos.size();i = i + 3){
         color2.push_back(1.0f);
         color2.push_back(1.0f);
         color2.push_back(1.0f);
       }
-      std::cout << "Entra aqui" << std::endl;
       glPointSize(1.0f);
       glEnable(GL_CULL_FACE);
       glEnableClientState(GL_VERTEX_ARRAY);
       glVertexPointer(3,GL_FLOAT,0,&(puntos[0]));
-      glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
+      glPolygonMode(GL_FRONT_AND_BACK,modePolygon);
+      //glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
       glColorPointer(3,GL_FLOAT,0,&color2[0]);
       glDrawElements(GL_TRIANGLES,caras.size(),GL_UNSIGNED_INT,&(caras[0]));
       glDisableClientState(GL_VERTEX_ARRAY);

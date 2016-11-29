@@ -1,5 +1,6 @@
 #include "lampara.h"
 #include<iostream>
+#include<math.h>
 #include <GL/glut.h>
 
 Lampara::Lampara(){
@@ -134,6 +135,16 @@ glPushMatrix();
     cubo.dibujar();
   glPopMatrix();
 
+  //Examen
+  glPushMatrix();
+     float rad = (angulo_union/2 + 45) *( 3.14159265f/180.0f );
+     glTranslatef(0.0f,8.5f,0.0f);
+     glRotatef(angulo_union/2 + 45 , 0.0, 0.0, 1.0);
+     glTranslatef(12.5f * sin(rad)/2,0.0f,0.0f);
+     glScalef(12.5f * sin(rad),1.0f,1.0f);
+     cubo.dibujar();
+  glPopMatrix();
+  //FIN-EXAMEN
 
     glPushMatrix();
       glTranslatef(0.0f,15.0f,0.0f);
@@ -143,6 +154,7 @@ glPushMatrix();
          glRotatef(90.0, 1.0, 0.0, 0.0);
          cilindro.dibujar();
       glPopMatrix();
+
 
 
       glPushMatrix();
