@@ -22,3 +22,7 @@ Creacion de objetos jerarquicos junto a su animacion.
 El objeto tiene implementada la animacion del objeto de Pixar para agacharse y mirarte.
 
 ![Ejemplo P2](https://github.com/ainokila/PracticasIG/blob/master/ejemplos/lampara2.png)
+
+Mejorada versión para el examen sobre la practica, añadido un 'muelle' que une las dos partes, se estira y se encoge cuando los grados de libertad de modifican.
+
+![Ejemplo P2](https://github.com/ainokila/PracticasIG/blob/master/ejemplos/examen.png)
