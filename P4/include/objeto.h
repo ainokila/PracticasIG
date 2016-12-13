@@ -32,7 +32,7 @@ class Objeto{
     void ampliar();
     void reducir();
 
-    void calcularNormalesPuntos();
+    void calcularNormales();
 
 
   protected:

@@ -37,12 +37,12 @@ void Objeto::dibujar(){
     glPolygonMode(GL_FRONT_AND_BACK,modePolygon);
 
     glEnableClientState(GL_COLOR_ARRAY);
-    glColorPointer(3,GL_FLOAT,0,&color1[0]);
+    glColorPointer(3,GL_FLOAT,0,&normalesPuntos[0]);
     glDrawElements(GL_TRIANGLES,caras.size()/2,GL_UNSIGNED_INT,&(caras[0]));
     glDisableClientState(GL_COLOR_ARRAY);
 
     glEnableClientState(GL_COLOR_ARRAY);
-    glColorPointer(3,GL_FLOAT,0,&color2[0]);
+    glColorPointer(3,GL_FLOAT,0,&normalesPuntos[0]);
     glDrawElements(GL_TRIANGLES,caras.size()/2,GL_UNSIGNED_INT,&(caras[caras.size()/2]));
     glDisableClientState(GL_COLOR_ARRAY);
 
@@ -134,47 +134,31 @@ void Objeto::insertarVertice(float x,float y,float z){
   puntos.push_back(z);
   bound.nuevaZ(z);
 
-  auxiliarNormal = puntos;
-  normalesPuntos = puntos;
-
-  //Pongo los elementos a 0
-  std::fill(auxiliarNormal.begin(), auxiliarNormal.end(), 0.0f);
-  std::fill(normalesPuntos.begin(), normalesPuntos.end(), 0.0f);
-
-  //auxiliarNormal.push_back(0);
-  //auxiliarNormal.push_back(0);
-  //auxiliarNormal.push_back(0);
+  normalesPuntos.push_back(0.0f);
+  normalesPuntos.push_back(0.0f);
+  normalesPuntos.push_back(0.0f);
 
 }
 
-//Funcion no probada aun
-void Objeto::calcularNormalesPuntos(){
-  float x,y,z,norm,mod;
-  for(int i = 0; i < puntos.size()-3;i = i +3){
-    x = normalesPuntos[i];y = normalesPuntos[i+1];z = normalesPuntos[i+2];
-    mod = sqrt(pow(x,2)+pow(y,2)+pow(z,2));
+void Objeto::calcularNormales(){
 
-    normalesPuntos[i] = x/mod;
-    normalesPuntos[i+1] = y/mod;
-    normalesPuntos[i+2] = z/mod;
-  }
-}
+  int v1,v2,v3;
+  for(int i = 0; i <= caras.size()-3;i = i +3){
 
+    v1=caras[i];
+    v2=caras[i+1];
+    v3=caras[i+2];
 
-void Objeto::insertarCara(int v1, int v2, int v3){
-    caras.push_back(v1);
-    caras.push_back(v2);
-    caras.push_back(v3);
+    //std::cout << v1 << " " << v2 << " " << v3 << " " << std::endl;
 
-    //Calculo la normal para esa cara ->
-
-    //Obtenemos el valor de los puntos
     float p_x = puntos.at(v1*3);
     float p_y = puntos.at(v1*3+1);
     float p_z = puntos.at(v1*3+2);
+
     float q_x = puntos.at(v2*3);
     float q_y = puntos.at(v2*3+1);
     float q_z = puntos.at(v2*3+2);
+
     float r_x = puntos.at(v3*3);
     float r_y = puntos.at(v3*3+1);
     float r_z = puntos.at(v3*3+2);
@@ -193,7 +177,7 @@ void Objeto::insertarCara(int v1, int v2, int v3){
 
     //Realizo el producto vectorial
 
-    m_x = a_x*b_z-a_z*b_y;
+    m_x = a_y*b_z-a_z*b_y;
     m_y = a_x*b_z-a_z*b_x;
     m_z = a_x*b_y-a_y*b_x;
 
@@ -208,42 +192,68 @@ void Objeto::insertarCara(int v1, int v2, int v3){
     normalesCaras.push_back(n_y);
     normalesCaras.push_back(n_z);
 
-    std::cout << n_x << " " << n_y << " " << n_z << " " << std::endl;
+    //std::cout << n_x << " " << n_y << " " << n_z << "  aas" << std::endl;
 
     //Sumar y Almacenar en una estructura auxiliar las normales en v1,v2,v3 para luego normalizar
 
-    auxiliarNormal[v1*3] = auxiliarNormal[v1*3] + n_x;
-    auxiliarNormal[v1*3+1] = auxiliarNormal[v1*3+1] + n_y;
-    auxiliarNormal[v1*3+2] = auxiliarNormal[v1*3+2] + n_z;
 
-    auxiliarNormal[v2*3] = auxiliarNormal[v2*3] + n_x;
-    auxiliarNormal[v2*3+1] = auxiliarNormal[v2*3+1] + n_y;
-    auxiliarNormal[v2*3+2] = auxiliarNormal[v2*3+2] + n_z;
+    normalesPuntos[v1*3] = normalesPuntos[v1*3] + n_x;
+    normalesPuntos[v1*3+1] = normalesPuntos[v1*3+1] + n_y;
+    normalesPuntos[v1*3+2] = normalesPuntos[v1*3+2] + n_z;
 
-    auxiliarNormal[v3*3] = auxiliarNormal[v3*3] + n_x;
-    auxiliarNormal[v3*3+1] = auxiliarNormal[v3*3+1] + n_y;
-    auxiliarNormal[v3*3+2] = auxiliarNormal[v3*3+2] + n_z;
+    mod = sqrt(pow(normalesPuntos[v1*3],2)+pow(normalesPuntos[v1*3+1],2)+pow(normalesPuntos[v1*3+2],2));
 
+    normalesPuntos[v1*3] = normalesPuntos[v1*3] / mod;
+    normalesPuntos[v1*3+1] = normalesPuntos[v1*3+1] / mod;
+    normalesPuntos[v1*3+2] = normalesPuntos[v1*3+2] / mod;
+
+    normalesPuntos[v2*3] = normalesPuntos[v2*3] + n_x;
+    normalesPuntos[v2*3+1] = normalesPuntos[v2*3+1] + n_y;
+    normalesPuntos[v2*3+2] = normalesPuntos[v2*3+2] + n_z;
+
+    mod = sqrt(pow(normalesPuntos[v2*3],2)+pow(normalesPuntos[v2*3+1],2)+pow(normalesPuntos[v2*3+2],2));
+
+    normalesPuntos[v2*3] = normalesPuntos[v2*3] / mod;
+    normalesPuntos[v2*3+1] = normalesPuntos[v2*3+1] / mod;
+    normalesPuntos[v2*3+2] = normalesPuntos[v2*3+2] / mod;
+
+    normalesPuntos[v3*3] = normalesPuntos[v3*3] + n_x;
+    normalesPuntos[v3*3+1] = normalesPuntos[v3*3+1] + n_y;
+    normalesPuntos[v3*3+2] = normalesPuntos[v3*3+2] + n_z;
+
+    mod = sqrt(pow(normalesPuntos[v3*3],2)+pow(normalesPuntos[v3*3+1],2)+pow(normalesPuntos[v3*3+2],2));
+
+    normalesPuntos[v3*3] = normalesPuntos[v3*3] / mod;
+    normalesPuntos[v3*3+1] = normalesPuntos[v3*3+1] / mod;
+    normalesPuntos[v3*3+2] = normalesPuntos[v3*3+2] / mod;
+
+    //std::cout << normalesPuntos[v3*3] << " " << normalesPuntos[v3*3+1] << " " << normalesPuntos[v3*3+2] << "  ad" << std::endl;
+    //std::cout << normalesPuntos[v3*3] << " " << normalesPuntos[v3*3+1] << " " << normalesPuntos[v3*3+2] << "  ad" << std::endl;
+    //std::cout << normalesPuntos[v3*3] << " " << normalesPuntos[v3*3+1] << " " << normalesPuntos[v3*3+2] << "  ad" << std::endl;
+
+    //std::cout << " a \n";
+
+
+
+  }
+}
+
+void Objeto::insertarCara(int v1, int v2, int v3){
+
+    caras.push_back(v1);
+    caras.push_back(v2);
+    caras.push_back(v3);
 
 }
 
 // INICIO ÑAPA
 void Objeto::ampliar(){
-  //glTranslatef((bound.getMaxX()+bound.getMinX())/2.0f,(bound.getMaxY()+bound.getMinY())/2.0f,(bound.getMaxZ()+bound.getMinZ())/2.0f);
-  //glScalef((bound.getMaxX()+bound.getMinX())*1e+38,(bound.getMaxY()+bound.getMinY())*1e+38,(bound.getMaxZ()+bound.getMinZ())*1e+38);
 
-  /*for(int i = 0 ; i < puntos.size() ; i++){
-    puntos[i]*=1.25f;
-  }
-  bound.calcularBoundingBox(puntos);*/
   glScalef(2.0f,2.0f,2.0f);
 }
 
 void Objeto::reducir(){
-  /*for(int i = 0 ; i < puntos.size() ; i++){
-    puntos[i]/=1.25f;
-  }
-  bound.calcularBoundingBox(puntos);*/
+
   glScalef(0.5f,0.5f,0.5f);
 
 }

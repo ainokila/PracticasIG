@@ -120,6 +120,18 @@ int Escena::teclaPulsada(unsigned char Tecla1,int x,int y) {
       break;
 
     //Tipo de Objeto ->
+    case 'G':
+    if(objetorev != NULL){
+      delete objetorev;
+      objetorev = NULL;
+    }
+    if(lampara != NULL){
+      delete lampara;
+      lampara = NULL;
+    }
+    if(objeto == NULL)
+      objeto = new Cubo(30,30,30);
+    break;
 
     case '1':
     if(objetorev != NULL){

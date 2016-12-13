@@ -26,5 +26,7 @@ Cubo::Cubo(float ladoX ,float ladoY ,float ladoZ){
   insertarCara(2,6,4);
   insertarCara(0,2,4);
 
+  calcularNormales();
+
 
 }
